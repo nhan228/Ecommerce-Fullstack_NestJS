@@ -1,0 +1,247 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// INIT ENUM
+enum MemberRole {
+  master
+  admin
+  member
+}
+
+enum AvailableStatus {
+  active
+  inactive
+}
+
+enum StatusUser {
+  available
+  block
+  deleted
+}
+
+enum VocherType {
+  discount
+  count
+  freeship
+  gift
+}
+
+enum PayMode {
+  cash
+  transfer
+}
+
+enum ReceiptStatus {
+  shopping
+  accepted
+  denied
+  pending
+  shipping
+  done
+  deleted
+}
+
+model banners {
+  id       Int             @id @default(autoincrement())
+  title    String
+  img      String
+  status   AvailableStatus @default(inactive)
+  createAt String?
+  updateAt String?
+}
+
+model categories {
+  id       Int             @id @default(autoincrement())
+  title    String          @unique @db.Char(255)
+  codeName String          @unique @db.Char(255)
+  status   AvailableStatus @default(active)
+  products products[]
+}
+
+model brands {
+  id       Int             @id @default(autoincrement())
+  title    String          @unique @db.Char(255)
+  codeName String          @unique @db.Char(255)
+  createAt String?
+  updateAt String?
+  status   AvailableStatus @default(inactive)
+  products products[]
+}
+
+model products {
+  id              Int                      @id @default(autoincrement())
+  avatar          String                   @db.LongText
+  name            String
+  des             String                   @db.LongText
+  pictures        pictures[]
+  price           Int
+  status          Boolean                  @default(true)
+  detail          String?                  @db.LongText
+  specification   products_specification[]
+  receipt_details receipt_details[]
+  promo           promo?
+  brandId         Int
+  brand           brands?                  @relation(fields: [brandId], references: [id])
+  categoryId      Int
+  category        categories?              @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId], map: "products_categoryId_fkey")
+}
+
+model pictures {
+  id        Int       @id @default(autoincrement())
+  url       String    @db.LongText
+  productId Int
+  product   products? @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "pictures_productId_fkey")
+}
+
+model products_specification {
+  id          Int       @id @default(autoincrement())
+  screen      String?
+  os          String?
+  camera      String?
+  cameraFront String?
+  cpu         String?
+  ram         String?
+  rom         String?
+  microUSB    String?
+  battery     String?
+  productId   Int       @unique
+  products    products? @relation(fields: [productsId], references: [id])
+  productsId  Int?
+}
+
+model promo {
+  id        Int      @id @default(autoincrement())
+  name      String
+  value     String?
+  product   products @relation(fields: [productId], references: [id])
+  productId Int      @unique
+}
+
+// USER
+model User {
+  id           Int             @id @default(autoincrement())
+  avatar       String          @db.LongText
+  firstName    String?
+  lastName     String?
+  userName     String          @unique
+  password     String
+  email        String          @unique
+  emailConfirm AvailableStatus @default(inactive)
+  status       Boolean         @default(true)
+  createAt     String
+  updateAt     String?
+  lastLogin    String?
+  phoneNumber  String?
+  bio          String?
+  birthday     String?
+  wallet       Float           @default(0) @db.Double()
+  // vocher       vocher?
+  ipList       String          @default("[]")
+  user_ip_list user_ip_list[]
+  receipts     receipts[]
+  address      address[]
+}
+
+model user_ip_list {
+  id         Int     @id @default(autoincrement())
+  ip         String  @db.Char(255)
+  status     Boolean @default(true)
+  userId     Int
+  createAt   String
+  deviceName String
+  user       User?   @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "user_ip_list_userId_fkey")
+}
+
+// model vocher {
+//   id                    Int                     @id @default(autoincrement())
+//   user                  User                    @relation(fields: [userId], references: [id])
+//   userId                Int                     @unique
+//   code                  String                  @unique
+//   createAt              String
+//   updateAt              String?
+//   value                 String
+//   quantity              Int                     @default(0)
+//   expiryDate            String
+//   expired               Boolean
+//   status                AvailableStatus         @default(inactive)
+//   minOrderValue         Int                     @default(0)
+//   maxOrderValue         Int                     @default(0)
+//   type                  VocherType
+//   isUsed                Boolean                 @default(false)
+//   order                 receipts[]
+//   receipt_details       receipt_details[]
+//   receipt_vocher_detail receipt_vocher_detail[]
+// }
+
+model address {
+  id       Int    @id @default(autoincrement())
+  title    String @unique @db.Char(255)
+  postcode String
+  userId   Int
+  User     User?  @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "address_userId_fkey")
+}
+
+model receipts {
+  id         Int               @id @default(autoincrement())
+  total      Int               @default(0)
+  createAt   String
+  updateAt   String
+  paid       Boolean           @default(false)
+  paidAt     String?
+  payMode    PayMode?          @default(cash)
+  userId     Int
+  status     ReceiptStatus     @default(shopping)
+  pending    String?
+  acceptAt   String?
+  cancelAt   String?
+  shippingAt String?
+  doneAt     String?
+  deleteAt   String?
+  user       User?             @relation(fields: [userId], references: [id])
+  usersId    Int?
+  detail     receipt_details[]
+  // receiptVocherDetail receipt_vocher_detail[]
+  // vocherId            Int?
+  // vocher              vocher?                 @relation(fields: [vocherId], references: [id])
+
+  @@index([userId], map: "receipts_userId_fkey")
+}
+
+// model receipt_vocher_detail {
+//   id        Int      @id @default(autoincrement())
+//   receiptId Int
+//   vocherId  Int
+//   note      String   @default("")
+//   vocher    vocher   @relation(fields: [vocherId], references: [id])
+//   receipt   receipts @relation(fields: [receiptId], references: [id])
+
+//   @@index([receiptId], map: "receipt_vocher_detail_receiptId_fkey")
+//   @@index([vocherId], map: "receipt_vocher_detail_vocherId_fkey")
+// }
+
+model receipt_details {
+  id        Int      @id @default(autoincrement())
+  receiptId Int
+  productId Int
+  quantity  Int
+  note      String   @default("")
+  product   products @relation(fields: [productId], references: [id])
+  receipt   receipts @relation(fields: [receiptId], references: [id])
+
+  @@index([productId], map: "receipt_details_productId_fkey")
+  @@index([receiptId], map: "receipt_details_receiptId_fkey")
+}

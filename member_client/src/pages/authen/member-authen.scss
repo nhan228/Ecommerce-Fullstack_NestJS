@@ -1,0 +1,169 @@
+$container: #ffffff25;
+$button: #e48a13;
+
+.body-authen-member{
+    width: 100vw;
+    height: 100vh;
+    background-color: #222;
+}
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(200px);
+    .container {
+        display: flex;
+        width: 620px;
+        height: 550px;
+        max-width: 99%;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transform: translate(50% 50%);
+        overflow: hidden;
+        background-color: $container;
+        border-radius: 15px;
+        box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.2);
+        border: 0.1px solid rgba(128, 128, 128, 0.178);
+        &::after {
+            position: absolute;
+            content: "";
+            width: 90%;
+            height: 100%;
+            right: -50%;
+            background: rgb(157, 173, 203);
+            background: radial-gradient(circle, rgba(157, 173, 203, 1) 61%, rgba(99, 122, 159, 1) 100%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .left {
+            width: 66%;
+            height: 100%;
+            position: relative;
+            .amazon-logo{
+                width: 100px;
+                position: absolute;
+                top: 90px;
+                left: 150px;
+                z-index: 1;
+                cursor: pointer;
+            }
+            .form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                backdrop-filter: blur(20px);
+                position: relative;
+                &::before {
+                    position: absolute;
+                    content: "";
+                    width: 40%;
+                    height: 40%;
+                    right: 1%;
+                    z-index: -1;
+                    background: radial-gradient(
+                        circle,
+                        rgb(194, 13, 170) 20%,
+                        rgb(26, 186, 235) 60%,
+                        rgb(26, 186, 235) 100%
+                    );
+                    filter: blur(70px);
+                    border-radius: 50%;
+                }
+                .member-form-title {
+                    margin-left: 50px;
+                    margin-bottom: 15px;
+                    font-weight: 600;
+                    font-size: 22px;
+                    font-family:inherit;
+                    letter-spacing: 1.5px;
+                    color: #e48a13;
+                }
+
+                .input-block {
+                    position: relative;
+                    label {
+                        position: absolute;
+                        left: 15%;
+                        top: 37%;
+                        pointer-events: none;
+                        color: $grayColor;
+                    }
+                    .input-text {
+                        background: rgba(253, 253, 253, 0);
+                        outline: none;
+                        border: 1px solid rgba(255, 0, 0, 0);
+                        color:$whiteColor;
+                        border-radius: 0.5rem;
+                        padding: 10px;
+                        margin: 15px auto;
+                        width: 80%;
+                        display: block;
+                        font-weight: 500;
+                        font-size: 1.1em;
+                        box-shadow:
+                            inset 4px 4px 4px rgba(165, 163, 163, 0.315),
+                            4px 4px 4px rgba(218, 218, 218, 0.13);
+                        &:focus {
+                            + {
+                                label {
+                                    transform: translate(-15%,-150%) scale(0.9);
+                                    transition: all 0.4s;
+                                }
+                            }
+                        }
+                        &:valid {
+                            + {
+                                label {
+                                    transform: translate(-10%,-140%) scale(0.9);
+                                    transition: all 0.4s;
+                                }
+                            }
+                        }
+                    }
+                    .member-btn-form {
+                        cursor: pointer;
+                        background: rgba(253, 253, 253, 0);
+                        outline: none;
+                        border: 1px solid rgba(255, 0, 0, 0);
+                        border-radius: 0.5rem;
+                        padding: 10px;
+                        margin: auto;
+                        margin-top: 30px;
+                        width: 80%;
+                        display: block;
+                        font-weight: 500;
+                        letter-spacing: 2px;
+                        font-size: 1.1em;
+                        background-color: $button;
+                        color: $whiteColor;
+                        font-size: medium;
+                        box-shadow: 2px 4px 8px rgba(70, 70, 70, 0.178);
+                        &:hover{
+                            font-weight: 600;
+                            background-color: #db913186;
+                        }
+                        &:active {
+                            background-color: #de9332;
+                            box-shadow: 1px 4px 10px rgba(139, 143, 143, 0.568);
+                        }
+                    }
+                }
+            }
+        }
+
+        .right {
+            width: 30%;
+            height: 100%;
+            .img {
+                width: 100%;
+                height: 100%;
+                right: 0;
+            }
+        }
+    }
+}

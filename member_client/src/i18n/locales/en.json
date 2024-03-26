@@ -1,0 +1,21 @@
+{
+    "navbar": {
+        "placeHolderSearch": "Search...",
+        "login": "Login",
+        "signup": "Sign up",
+        "logout": "Log out",
+        "topup": "Top up",
+        "hi": "Hi",
+        "wallet": "Wallet"
+    },
+    "sidebar": {
+        "home": "Home",
+        "courses": "Courses",
+        "about": "About"
+    },
+    "footer": {
+        "aboutUs": "About us",
+        "address": "Address",
+        "contactUs": "Contact us"
+    }
+}

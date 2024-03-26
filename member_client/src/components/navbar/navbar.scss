@@ -1,0 +1,197 @@
+nav {
+    height: 56px;
+    background: var(--light);
+    padding: 0 24px 0 0;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    // z-index: 1000;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 100%;
+        bottom: -40px;
+        left: 0;
+        border-radius: 50%;
+        box-shadow: -20px -20px 0 var(--light);
+    }
+    div {
+        color: var(--dark);
+    }
+
+    .menu-button {
+        cursor: pointer;
+        z-index: 1;
+        &:hover {
+            svg {
+                .line {
+                    stroke: red;
+                }
+            }
+            transition: all 0.3s ease;
+            transform: scale(1.1);
+        }
+        input {
+            display: none;
+            &:checked {
+                + {
+                    svg {
+                        transform: rotate(-45deg);
+                        .line-top-bottom {
+                            stroke-dasharray: 20 300;
+                            stroke-dashoffset: -32.42;
+                        }
+                    }
+                }
+            }
+        }
+        svg {
+            height: 2em;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            .line {
+                fill: none;
+                stroke: var(--dark);
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 3;
+                transition:
+                    stroke-dasharray 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    stroke-dashoffset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                &.line-top-bottom {
+                    stroke-dasharray: 12 63;
+                }
+            }
+        }
+    }
+
+    form {
+        max-width: 400px;
+        width: 100%;
+        margin-right: auto;
+        .form-input {
+            display: flex;
+            align-items: center;
+            height: 36px;
+            input {
+                flex-grow: 1;
+                padding: 0 16px;
+                height: 100%;
+                border: none;
+                background: var(--grey);
+                border-radius: 36px 0 0 36px;
+                outline: none;
+                width: 100%;
+                color: var(--dark);
+            }
+            button {
+                width: 80px;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: var(--primary);
+                color: var(--light);
+                font-size: 18px;
+                border: none;
+                outline: none;
+                border-radius: 0 36px 36px 0;
+                cursor: pointer;
+            }
+        }
+    }
+    .notif {
+        font-size: 20px;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            animation: bellRing 0.6s both;
+        }
+        &:active {
+            transform: scale(0.9);
+        }
+        .count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            background: var(--danger);
+            border-radius: 50%;
+            color: var(--light);
+
+            font-weight: 700;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    @keyframes bellRing {
+        0%,
+        100% {
+            transform-origin: top;
+        }
+
+        15% {
+            transform: rotateZ(10deg);
+        }
+
+        30% {
+            transform: rotateZ(-10deg);
+        }
+
+        45% {
+            transform: rotateZ(5deg);
+        }
+
+        60% {
+            transform: rotateZ(-5deg);
+        }
+
+        75% {
+            transform: rotateZ(2deg);
+        }
+    }
+
+    .profile {
+        img {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    .theme-toggle {
+        display: block;
+        min-width: 50px;
+        height: 25px;
+        background: var(--grey);
+        cursor: pointer;
+        position: relative;
+        border-radius: 25px;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            bottom: 2px;
+            width: calc(25px - 4px);
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        &.active {
+            &::before {
+                left: calc(100% - (25px - 4px) - 2px);
+            }
+        }
+    }
+    #theme-toggle {
+        display: none;
+    }
+}

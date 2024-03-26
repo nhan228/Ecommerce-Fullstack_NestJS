@@ -1,0 +1,2 @@
+export type IpList = string[];
+

@@ -1,0 +1,253 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: $font-member;
+}
+:root {
+	--light: #f6f6f9;
+	--primary: #febd69;
+	--process: #1976d2;
+	--light-primary: #cfe8ff;
+	--grey: #eee;
+	--dark-grey: #aaaaaa;
+	--dark: #363949;
+	--danger: #d32f2f;
+	--light-danger: #fecdd3;
+	--warning: #fbc02d;
+	--light-warning: #fff2c6;
+	--success: #388e3c;
+	--light-success: #bbf7d0;
+}
+.bx {
+	font-size: $bx;
+}
+
+html {
+	overflow-x: hidden;
+}
+.admin_page.dark {
+	--light: #181a1e;
+	--grey: #25252c;
+	--dark: #fbfbfb;
+}
+.admin_page {
+	width: 100vw;
+	height: 100vh;
+	background: var(--grey);
+	overflow-x: hidden;
+	@media screen and (max-width: 768px) {
+		.sidebar {
+			width: 200px;
+		}
+		.content {
+			width: calc(100% - 60px);
+			left: 200px;
+		}
+	}
+	@media screen and (max-width: 576px) {
+		.content {
+			nav {
+				form {
+					.form-input {
+						input {
+							display: none;
+						}
+						button {
+							width: auto;
+							height: auto;
+							background: transparent;
+							color: var(--dark);
+							border-radius: none;
+						}
+					}
+				}
+				form.show {
+					.form-input {
+						input {
+							display: block;
+							width: 100%;
+						}
+						button {
+							width: 36px;
+							height: 100%;
+							color: var(--light);
+							background: var(--danger);
+							border-radius: 0 36px 36px 0;
+						}
+					}
+				}
+				form.show ~ .notif {
+					display: none;
+				}
+				form.show ~ .profile {
+					display: none;
+				}
+			}
+			main {
+				.insights {
+					grid-template-columns: 1fr;
+				}
+				.bottom-data {
+					.header {
+						min-width: 340px;
+					}
+					.orders {
+						table {
+							min-width: 340px;
+						}
+					}
+					.reminders {
+						.task-list {
+							min-width: 340px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.status-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.status-box {
+		font-size: 12px;
+		font-weight: 600;
+		.active {
+			padding: 4px 12px;
+			border-radius: 20px;
+			background: var(--success);
+			color: var(--light);
+		}
+		.inactive {
+			padding: 4px 12px;
+			border-radius: 20px;
+			background: var(--dark-grey);
+			color: var(--light);
+		}
+	}
+}
+.homepage{
+	.content_body{
+		.outlet-box{
+			height: 540px;
+		}
+	}
+}
+.load-contanier {
+	display: flex;
+	justify-content: center;
+	.load-group {
+		width: fit-content;
+		.change-btn {
+			border: none;
+			color: #fff;
+			background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+			border-radius: 20px;
+			background-size: 100% auto;
+			font-weight: 600;
+			font-family: inherit;
+			font-size: 12px;
+			padding: 0.6em 1.5em;
+			cursor: pointer;
+			&:hover {
+				background-position: right center;
+				background-size: 200% auto;
+				animation: pulse512 1.5s infinite;
+			}
+			&:active {
+				transform: scale(0.9);
+			}
+			@keyframes pulse512 {
+				0% {
+					box-shadow: 0 0 0 0 #05bada66;
+				}
+
+				70% {
+					box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+				}
+
+				100% {
+					box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+				}
+			}
+		}
+	}
+}
+
+.noselect {
+	width: 150px;
+	height: 50px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	background-color: $primaryColor;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+	margin: 0 auto;
+
+	&,
+	span {
+		transition: 200ms;
+	}
+
+	.text {
+		transform: translateX(35px);
+		color: white;
+		font-weight: bold;
+	}
+
+	.icon {
+		position: absolute;
+		border-left: 1px solid #fff;
+		transform: translateX(110px);
+		width: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		svg{
+			width: 20px;
+			fill: #fff;
+		}
+		
+	}
+	i {
+		font-size: 16px;
+		color: var(--light);
+	}
+
+	&:hover {
+		background: $primaryColor;
+		svg{
+			transition: .3s;
+			transform: scale(1.3);
+		}
+	}
+
+	&:hover .text {
+		color: transparent;
+	}
+
+	&:hover .icon {
+		width: 150px;
+		border-left: 1px solid #fff;
+		transform: translateX(0);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:active {
+		transform: scale(0.9);
+		.icon {
+			i {
+				transform: scale(0.85);
+			}
+		}
+	}
+}

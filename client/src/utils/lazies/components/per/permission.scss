@@ -1,0 +1,32 @@
+.permission {
+    width: 100vw;
+    height: 100vh;
+    background-color: $blackColor;
+    color: $whiteColor;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    .access {
+        font-size: 80px;
+        color: $redColor;
+    }
+    .title-access{
+        font-size: 30px;
+
+    }
+    hr{
+        width: 50%;
+        margin: 20px auto;
+    }
+    .icon{
+        font-size: 30px;
+    }
+    .err{
+        margin-top: 20px;
+        font-size: 20px;
+        color: $redColor;
+        text-decoration: underline;
+    }
+}

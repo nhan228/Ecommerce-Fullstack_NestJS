@@ -1,0 +1,21 @@
+{
+    "navbar": {
+        "placeHolderSearch": "Tìm kiếm...",
+        "login": "Đăng nhập",
+        "signup": "Đăng kí",
+        "logout": "Đăng xuất",
+        "topup": "Nạp tiền",
+        "hi": "Chào",
+        "wallet": "Ví tiền"
+    },
+    "sidebar": {
+        "home": "Trang chủ",
+        "courses": "Khóa học",
+        "about": "Giới thiệu"
+    },
+    "footer": {
+        "aboutUs": "Về chúng tôi",
+        "address": "Địa chỉ",
+        "contactUs": "Liên hệ"
+    }
+}
